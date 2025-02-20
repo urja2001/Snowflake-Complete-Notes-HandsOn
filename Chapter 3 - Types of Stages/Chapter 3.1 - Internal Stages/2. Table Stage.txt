@@ -87,3 +87,23 @@ detailed_output=true ;
 -- Downloading file to local system
 
 get @%customerstage file://C:\Users\LENOVO\OneDrive\SnowFlake\unloading;
+
+====================================== Summary =============================================
+
+--- Creating stage
+
+create or replace stage "@%Same_table-stage_name_as_of_table-name_created"
+file_format = unload_ff ;
+
+
+--- Copying files into internal stage from snowflake table
+
+copy into @%Same_table-stage_name_as_of_table-name_created/path-if-any
+from table_name
+overwrite=true
+single=true 
+detailed_output=true ;
+
+-- Downloading file to local system
+
+get @%Same_table-stage_name_as_of_table-name_created/path-if-any file://destination-path-location-of-datafile;
