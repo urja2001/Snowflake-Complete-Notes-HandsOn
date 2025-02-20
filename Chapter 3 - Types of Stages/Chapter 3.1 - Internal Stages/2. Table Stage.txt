@@ -87,7 +87,9 @@ detailed_output=true ;
 get @%customerstage file://C:\Users\LENOVO\OneDrive\SnowFlake\unloading;
 
 
-4) Copying files into internal stage from S3 bucket ( External Stage)
+------------------------------------------------------ Loading Data from External Stage into Internal Stage --------------------------------------------------------------------
+
+4) Copying files into internal stage from S3 bucket
 
 copy into @%data/data_0_0_0.csv.gz
 from data
