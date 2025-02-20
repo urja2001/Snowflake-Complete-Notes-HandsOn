@@ -1,1 +1,12 @@
+                                                                    External Stages
+
+-- Snowflake External tables allow you to query the files stored in external stage like a regular table, that means without moving that data from files to Snowflake tables.
+-- External tables access the files stored in external stage area such as Amazon $3, GCP bucket, or Azure blob storage.
+-- External tables store metadata about these data files, such as value(complete record), the filename and file row number.
+-- External tables are read-only, therefore no DML operations can be performed on them.
+-- But we can use external tables for query and join operations.
+-- Views and Materialized views can be created against external tables.
+-- Querying data from external tables is likely slower than querying database tables.
+-- Advantage of external table is you can analyze the data with out storing it in Snowflake.                   
+-- We will see how to create external tables on stages using internal and external stages.
 
