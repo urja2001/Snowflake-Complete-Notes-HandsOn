@@ -1,64 +1,4 @@
-                                                                  **STAGES - INTERNAL** 
-
--- A stage specifies where data files are stored (i.e. “staged”) so that the data in the files can be loaded into a table.
--- By default, each user and table in Snowflake is automatically allocated an internal stage for staging data files 
--- to be loaded. In addition, you can create named internal stages.
-
--- 3 types of internal stages -- 
-                                  1. USER  2. TABLE  3. NAMED
-
--------------------------------------------USER STAGE--------------------------------------------
--- each user is allocated a user stage by default for storing files.
--- user stages cannot be altered or dropped.
--- This stage is a convenient option if your files will only be accessed by a single user i.e. Other users can’t access these stage. But can copy to multiple tables.
--- User stages are referenced using @~
-
-
-● Loading data to USER stage using snowsql cli
-   put file://C:\Users\LENOVO\OneDrive\customer_10k_good_data.csv @~user_staged;    
-
-● Showing(listing) a user stage 
-    list @~user_staged;
-
-------------------------------------------TABLE STAGE---------------------------------------------------------
--- Each table has a table stage allocated to it by default for storing files
--- Table stages name should be same as the table name ; e.g. a table named mytable has a stage referenced as @%mytable.
--- Table stages cannot be altered or dropped.
--- Multiple users can access table stage. But can copy to single table alone.
--- Don’t support transforming data while loading it.
--- Need OWNERSHIP privilege on the table.
--- Table stages are referred using @%
-
-
-● Loading data to TABLE stage 
-    put file://C:\Users\LENOVO\OneDrive\customer_10k_good_data.csv @%cli_customer;    
-    
-● Showing(listing) table stage 
-     list @%cli_customer;
-     
-     
-------------------------------------------------NAMED STAGE----------------------------------------------------
-
--- Can load data into multiple tables(Needs user with appropriate privileges).
--- Named stages are referred using @
-
-
-● Creating a named stage
-  create or replace stage my_stage
-  file_format = my_csv_format;
-  
-● Creating a named stage by giving ff values  
-  create or replace stage my_stage
-  file_format = (type = 'CSV' field_delimiter = '|' skip_header = 1);
-
-● Loading data to NAMED stage 
-    put file://C:\Users\LENOVO\OneDrive\customer_10k_good_data.csv @customer_stage;    
-    
-● Showing(listing) table stage 
-         list @customer_stage;
-
-
----------------------------------------uploading data to the stages(USER,TABLE,NAMED)---------------------------------
+                                                          **Uploading data to the stages(USER,TABLE,NAMED)**
 
 ● For loading from internal stages, we use 2 commands  -- 1. PUT     2. COPY
 
@@ -70,7 +10,7 @@
      parallel = 10 Auto_compress = true/ False ;
      
    -- example 
-   put file://C:\Users\LENOVO\OneDrive\mydata.csv @~ auto_compress=true;
+   put file://C:\Users\LENOVO\OneDrive\SnowFlake\mydata.csv @~ auto_compress=true;
 
 -- 2. COPY -> The files must already be in stage location.
 
@@ -91,7 +31,7 @@
 get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
 
   -- example
-      get @~/user_stage/customer/data file://C:\Users\LENOVO\OneDrive\unloading;
+      get @~/user_stage/customer/data file://C:\Users\LENOVO\OneDrive\SnowFlake\unloading;
 
 -- copy command properties    
      pattern='.*/.*/.*[.]csv[.]gz'
@@ -106,3 +46,66 @@ get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
      TRUNCATECOLUMNS = TRUE | FALSE
      FORCE = TRUE | FALSE
      LOAD_UNCERTAIN_FILES = TRUE | FALSE  
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                                         **STAGES - INTERNAL** 
+
+-- A stage specifies where data files are stored (i.e. “staged”) so that the data in the files can be loaded into a table.
+-- By default, each user and table in Snowflake is automatically allocated an internal stage for staging data files 
+-- to be loaded. In addition, you can create named internal stages.
+
+-- 3 types of internal stages -- 
+                                  1. USER  2. TABLE  3. NAMED
+
+-------------------------------------------USER STAGE--------------------------------------------
+-- each user is allocated a user stage by default for storing files.
+-- user stages cannot be altered or dropped.
+-- This stage is a convenient option if your files will only be accessed by a single user i.e. Other users can’t access these stage. But can copy to multiple tables.
+-- User stages are referenced using @~
+
+
+● Loading data to USER stage using snowsql cli
+   put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer_10k_good_data.csv @~user_staged;    
+
+● Showing(listing) a user stage 
+    list @~user_staged;
+
+------------------------------------------TABLE STAGE---------------------------------------------------------
+-- Each table has a table stage allocated to it by default for storing files
+-- Table stages name should be same as the table name ; e.g. a table named mytable has a stage referenced as @%mytable.
+-- Table stages cannot be altered or dropped.
+-- Multiple users can access table stage. But can copy to single table alone.
+-- Don’t support transforming data while loading it.
+-- Need OWNERSHIP privilege on the table.
+-- Table stages are referred using @%
+
+
+● Loading data to TABLE stage 
+    put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer_10k_good_data.csv @%cli_customer;    
+    
+● Showing(listing) table stage 
+     list @%cli_customer;
+     
+     
+------------------------------------------------NAMED STAGE----------------------------------------------------
+
+-- Can load data into multiple tables(Needs user with appropriate privileges).
+-- Named stages are referred using @
+
+
+● Creating a named stage
+  create or replace stage my_stage
+  file_format = my_csv_format;
+  
+● Creating a named stage by giving ff values  
+  create or replace stage my_stage
+  file_format = (type = 'CSV' field_delimiter = '|' skip_header = 1);
+
+● Loading data to NAMED stage 
+    put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer_10k_good_data.csv @customer_stage;    
+    
+● Showing(listing) table stage 
+         list @customer_stage;
+
+
