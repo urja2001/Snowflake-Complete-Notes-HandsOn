@@ -3,7 +3,7 @@
 
 Syntax : - put file://path-location-of-datafile @~/user-stage_name;
 
-   put file://C:\Users\LENOVO\OneDrive\customer.csv @~/urja;
+   put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer.csv @~/urja;
 
 
 2. Listing a user stage 
@@ -78,4 +78,4 @@ detailed_output=true ;
 
 -- Unloading file to local system
 
-get @~/user_stage/customer/data file://C:\Users\LENOVO\OneDrive\unloading;
+get @~/user_stage/customer/data file://C:\Users\LENOVO\OneDrive\SnowFlake\unloading;
