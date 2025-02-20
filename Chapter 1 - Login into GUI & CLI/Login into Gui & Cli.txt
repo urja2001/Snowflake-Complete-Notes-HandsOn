@@ -1,0 +1,206 @@
+Reference :-
+
+1. Create a account in SnowFlake
+
+Go to chrome --> SnowFlake Login --> Login | Snowflake Web User Interface
+
+OR
+
+For 30 days free trail account
+
+https://www.snowflake.com/login/
+
+OR
+
+For 120 days free trail account
+
+https://signup.snowflake.com/?trial=streamlit-hackathon
+
+
+In Snowflake edition select --> Enterprise edition  
+
+Go to your gmail --> Snowflake Computing --> For username and Password
+
+
+2. To login again to SnowFlake Account
+
+Go to your gmail --> Welcome To Snowflake!
+
+Syntax :-  https://account_id-organization_name.snowflakecomputing.com
+
+eg. Dedicated Login URL : https://nugxbsj-web61454.snowflakecomputing.com
+
+
+######################################## Connect SnowFlake using SnowSql ###################################
+
+1. There are 3 ways to connect snowflake_sight via snowsql
+
+Snowflake Documentation --> Guides -->  Organizations & Accounts --> Account Identifiers
+
+Reference :- https://docs.snowflake.com/en/user-guide/admin-account-identifier
+
+1) By Connecting it using account-identifier  
+
+cloud_region_id :- is the identifier for the cloud region (dictated by the cloud platform)
+
+cloud :- is the identifier for the cloud platform (aws, azure, or gcp)
+
+Syntax :- snowsql -a account-identifier.cloud_region_id -u username
+
+snowsql -a QSB59620.us-east-1 -u Ruffina
+
+
+2. By Connecting using conf file
+
+Go to C Drive --> Users --> Admin --> .snowsql --> Click on conf
+
+a) Accesing snowflake without group
+
+### Do this above connections
+
+accountname = account-identifier.cloud_region_id   or   account-identifier.cloud_region_id.cloud         # QSB59620.us-east-1 
+username = username                                                                                      # Ruffina 
+password = password                                                                                      # Ruffina2301
+
+
+On Command Promopt type  :- snowsql
+
+
+### To exit Press :- Ctrl + D 
+
+
+b) Accesing snowflake using group
+
+### Do this inside connections
+
+[connections.connection-name]                                                                            # catch_me_if_you_can 
+
+accountname = account-identifier.cloud_region_id   or   account-identifier.cloud_region_id.cloud         # QSB59620.us-east-1 
+username = username                                                                                      # Ruffina 
+password = password                                                                                      # Ruffina2301
+
+
+On Command Promopt type 
+
+Syntax :- snowsql -c connection-name 
+
+snowsql -c catch_me_if_you_can
+
+
+Syntax :- snowsql -c connection-name -u username
+
+snowsql -c catch_me_if_you_can -u Ruffina
+
+
+### To exit Press :- Ctrl + D 
+
+
+################################################ Creating ######################################################
+
+1. For Warehouse
+
+Reference :- https://docs.snowflake.com/en/user-guide/warehouses
+
+
+1) To create a warehouse
+
+create or replace warehouse WARE_DEMO1
+with warehouse_type = 'standard',
+warehouse_size = 'x-small',
+auto_suspend = 60
+auto_resume = true
+initially_suspended = true
+
+
+2) To change and resume the warehouse  
+
+ALTER WAREHOUSE WARE_DEMO1 resume
+
+
+3) To use warehouse
+
+Use WAREHOUSE WARE_DEMO1
+
+
+4) To drop the warehouse
+
+drop warehouse WARE_DEMO1
+
+
+2. For Database
+
+Reference :- https://docs.snowflake.com/en/sql-reference/commands-database
+
+
+1) To create a database
+
+create or replace database sky  
+
+
+2) To change database name
+
+ALTER DATABASE sky RENAME TO heaven
+
+
+3) To use database
+
+USE heaven
+
+
+4)  To drop the warehouse
+
+drop  DATABASE heaven 
+
+
+3. For Schema
+
+Reference :- https://docs.snowflake.com/en/sql-reference/sql/create-schema
+
+
+1) To create a schema
+
+create or replace schema sky_schema  
+
+
+2) To create a schema
+
+create or replace schema gheaven.sky_schema1  
+
+
+3) To change schema name
+
+ALTER schema sky_schema  RENAME TO sky_schema2  
+
+
+4) To use schema
+
+Use HEAVEN.SKY_SCHEMA2
+
+
+5) To drop the schema
+
+drop  schema sky_schema2 
+
+
+4. For Table
+
+Reference :- https://docs.snowflake.com/en/sql-reference/sql/create-table
+
+1) To create a table
+
+CREATE OR REPLACE table sky_table(stud_no int, stud_name varchar(20))
+
+
+2) To create a table inside another schema
+
+CREATE OR REPLACE table sky_schema.sky_table1(stud_no int, stud_name varchar(20))
+
+
+3) To change table name
+
+ALTER table sky_table  RENAME TO sky_table1  
+
+
+4) To drop the table
+
+drop  table sky_table1
