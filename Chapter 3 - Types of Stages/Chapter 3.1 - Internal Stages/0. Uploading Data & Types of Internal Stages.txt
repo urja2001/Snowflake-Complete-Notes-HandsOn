@@ -66,10 +66,13 @@ get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
 
 
 ● Loading data to USER stage using snowsql cli
-   put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer_10k_good_data.csv @~user_staged;    
+   put put file://path-location-of-datafile @~/user-stage_name;    
 
 ● Showing(listing) a user stage 
-    list @~user_staged;
+    list @~;
+
+● Unloading data into local system
+    get @~/user_stage_name/path-if-any file://destination-path-location-of-datafile;
 
 ------------------------------------------TABLE STAGE---------------------------------------------------------
 -- Each table has a table stage allocated to it by default for storing files
@@ -82,11 +85,13 @@ get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
 
 
 ● Loading data to TABLE stage 
-    put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer_10k_good_data.csv @%cli_customer;    
+    put file://path-location-of-datafile @%Same_table-stage_name_as_of_table_created;    
     
-● Showing(listing) table stage 
-     list @%cli_customer;
-     
+● Showing(listing) TABLE stage  
+     list @%Same_table-stage_name_as_of_table_created;
+
+● Unloading data into local system
+    get @%Same_table-stage_name_as_of_table-name_created/path-if-any file://destination-path-location-of-datafile;
      
 ------------------------------------------------NAMED STAGE----------------------------------------------------
 
@@ -103,9 +108,10 @@ get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
   file_format = (type = 'CSV' field_delimiter = '|' skip_header = 1);
 
 ● Loading data to NAMED stage 
-    put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer_10k_good_data.csv @customer_stage;    
-    
+    put file://path-location-of-datafile @Same_named-stage_name_as_of_stage_created;
+        
 ● Showing(listing) table stage 
-         list @customer_stage;
+         list @customerstage;
 
-
+● Unloading data into local system
+    get @Same_named-stage_name_as_of_stage-name_created/path-if-any file://destination-path-location-of-datafile;
