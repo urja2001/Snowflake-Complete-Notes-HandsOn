@@ -76,3 +76,22 @@ detailed_output=true ;
 -- Unloading file to local system
 
 get @~/user_stage/customer/data file://C:\Users\LENOVO\OneDrive\SnowFlake\unloading;
+
+
+4) listing files in internal stage
+ 
+list @~;
+
+
+5) Copying files into internal stage from S3 bucket ( External Stage)
+
+copy into @~/user_stage/data_0_0_0.csv.gz
+from data
+overwrite=true
+single=true 
+detailed_output=true ;
+
+
+-- Downloading file to local system                                     
+
+get @~/user_stage/data_0_0_0.csv.gz file://C:\Users\LENOVO\OneDrive\SnowFlake\unloading;
