@@ -1,4 +1,4 @@
-# Data Loading From Internal Tables & Unloading of Data From Internal & External Tables in Snowflake  ❄️
+# Data Loading & Unloading of Data From Internal & External Tables in Snowflake  ❄️
 
 <div align="center">
 <img align="left" alt="Snowflake" src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*BFy-WpFk_NA3z0FAWSelVw.png" width="600" height="400" >
