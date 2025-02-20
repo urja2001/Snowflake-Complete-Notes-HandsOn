@@ -1,7 +1,4 @@
-
 1. Loading data to USER stage
-
-Syntax : - put file://path-location-of-datafile @~/user-stage_name;
 
    put file://C:\Users\LENOVO\OneDrive\SnowFlake\customer.csv @~/urja;
 
