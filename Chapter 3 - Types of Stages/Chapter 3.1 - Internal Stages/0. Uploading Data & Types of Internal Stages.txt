@@ -1,4 +1,4 @@
-                                                          **Uploading data to the stages(USER,TABLE,NAMED)**
+                                                          **Uploading data to the stages(USER, TABLE & NAMED)**
 
 ● For loading from internal stages, we use 2 commands  -- 1. PUT     2. COPY
 
