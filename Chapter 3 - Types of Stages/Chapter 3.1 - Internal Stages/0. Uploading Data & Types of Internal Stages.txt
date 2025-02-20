@@ -96,7 +96,7 @@ get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
 ------------------------------------------------NAMED STAGE----------------------------------------------------
 
 -- Can load data into multiple tables(Needs user with appropriate privileges).
--- To store files are staged and managed by one or more users and loaded into one or more tables i.e. Multiple files can be stored and loaded into multiple tables by multiple user.
+-- To store files are staged and managed by one or more users and loaded into one or more tables i.e. Multiple files can be stored and loaded into multiple tables by multiple users.
 -- Named stages are referred using @
 
 
