@@ -15,7 +15,7 @@
 
 
 ● Loading data to USER stage using snowsql cli
-   put file://C:\Users\\LENOVO\OneDrive\customer_10k_good_data.csv @~user_staged;    
+   put file://C:\Users\LENOVO\OneDrive\customer_10k_good_data.csv @~user_staged;    
 
 ● Showing(listing) a user stage 
     list @~user_staged;
@@ -31,7 +31,7 @@
 
 
 ● Loading data to TABLE stage 
-    put file://C:\Users\\LENOVO\OneDrive\customer_10k_good_data.csv @%cli_customer;    
+    put file://C:\Users\LENOVO\OneDrive\customer_10k_good_data.csv @%cli_customer;    
     
 ● Showing(listing) table stage 
      list @%cli_customer;
@@ -52,7 +52,7 @@
   file_format = (type = 'CSV' field_delimiter = '|' skip_header = 1);
 
 ● Loading data to NAMED stage 
-    put file://C:\Users\\LENOVO\OneDrive\customer_10k_good_data.csv @customer_stage;    
+    put file://C:\Users\LENOVO\OneDrive\customer_10k_good_data.csv @customer_stage;    
     
 ● Showing(listing) table stage 
          list @customer_stage;
@@ -70,7 +70,7 @@
      parallel = 10 Auto_compress = true/ False ;
      
    -- example 
-   put file://C:\Users\\LENOVO\OneDrive\mydata.csv @~ auto_compress=true;
+   put file://C:\Users\LENOVO\OneDrive\mydata.csv @~ auto_compress=true;
 
 -- 2. COPY -> The files must already be in stage location.
 
@@ -91,7 +91,7 @@
 get @stage-type_name/path-if-any file://destination-path-location-of-datafile;
 
   -- example
-      get @~/user_stage/customer/data file://C:\Users\\LENOVO\OneDrive\unloading;
+      get @~/user_stage/customer/data file://C:\Users\LENOVO\OneDrive\unloading;
 
 -- copy command properties    
      pattern='.*/.*/.*[.]csv[.]gz'
