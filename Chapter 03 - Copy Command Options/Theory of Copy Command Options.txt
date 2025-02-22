@@ -1,7 +1,6 @@
                                                                    Copy Command Options
 
-Syntax: 
-
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -22,7 +21,7 @@ Syntax:
 
 Validates the data files instead of loading them into the table i.e. the COPY command tests the files for errors but does not load them.
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -42,7 +41,7 @@ Specifies whether to return only files that have failed to load in the statement
 
 By Default is False.
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -56,7 +55,7 @@ String that specifies the error handling for the load operation.
 
 By Default is ABORT_STATEMENT.
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -90,13 +89,14 @@ Note : Note that this option reloads files, potentially duplicating data in a ta
 
 By Default is False, if not specified this property Copy command will not fail but it skips loading the data. 
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
         FORCE = TRUE | FALSE
 
 --------------------------------------------------------------------------------------------------------------------------
+
 5. SIZE_LIMIT
 
 Specify maximum size ( upto 25 MB ) in bytes of data loaded in that command.
@@ -108,7 +108,7 @@ Note : At least one file is loaded regardless of the value specified for SIZE_LI
 
 By default size is set to null i.e. no size limit
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -118,7 +118,7 @@ Syntax:
 
 6. TRUNCATECOLUMNS = TRUE | FALSE
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -128,7 +128,7 @@ Syntax:
 
 7. ENFORCE_LENGTH
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -145,7 +145,7 @@ Note : If this option is set to TRUE, note that a best effort is made to remove 
 
 By Default is False
 
-Syntax: 
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -157,8 +157,19 @@ Syntax:
 
 9. LOAD_UNCERTAIN_FILES
 
-Syntax: 
+Specifies to load files for which the load status is unknown. 
 
+Not : The COPY command skips these files by default.
+      
+      The load status is unknown if all of the following conditions are true:
+
+          1. The file’s LAST_MODIFIED date (i.e. date when the file was staged) is older than 64 days.
+
+          2. The initial set of data was loaded into the table more than 64 days earlier.
+
+          3. If the file was already loaded successfully into the table, this event occurred more than 64 days earlier.
+
+Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
