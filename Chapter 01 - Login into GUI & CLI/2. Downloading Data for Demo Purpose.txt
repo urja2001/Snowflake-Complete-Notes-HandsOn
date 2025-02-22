@@ -1,6 +1,6 @@
                                                                         Downloading Data for Demo Purpose
 
-https://github.com/datablist/sample-csv-files
+https://www.sample-videos.com/download-sample-csv.php
 
 
 https://github.com/jeffcogswell/mongodb-classicmodels
