@@ -14,7 +14,7 @@ OR
 
 For 120 days free trail account
 
-https://signup.snowflake.com/?trial=streamlit-hackathon
+https://signup.snowflake.com/?trial=student
 
 
 In Snowflake edition select --> Enterprise edition  
