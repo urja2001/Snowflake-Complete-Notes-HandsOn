@@ -1,8 +1,15 @@
                                                                    Copy Command Options
 
+Loads data from files to an existing table. 
+
+The files must already be in one of the following locations:
+
+       1) Named internal stage or table/user stage - Files can be staged using the PUT command.
+       2) Named external stage - references an external location (Amazon S3, Google Cloud Storage, or Microsoft Azure).
+
 Syntax : 
         COPY INTO <table_name>
-        FROM @ExternalStage
+        FROM @InternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
         [ copyOptions ]
         VALIDATION_MODE = [ RETURN_<n>_ROWS | RETURN_ERRORS | RETURN_ALL_ERRORS ]
