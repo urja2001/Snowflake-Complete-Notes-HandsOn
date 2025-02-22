@@ -1,0 +1,175 @@
+                                                                    External Stages
+
+-- Snowflake External tables allow you to query the files stored in external stage like a regular table, that means without moving that data from files to Snowflake tables.
+-- External tables access the files stored in external stage area such as Amazon $3, GCP bucket, or Azure blob storage.
+-- External tables store metadata about these data files, such as value(complete record), the filename and file row number.
+-- External tables are read-only, therefore no DML operations can be performed on them.
+-- But we can use external tables for query and join operations.
+-- Views and Materialized views can be created against external tables.
+-- Querying data from external tables is likely slower than querying database tables.
+-- Advantage of external table is you can analyze the data with out storing it in Snowflake.                   
+-- We will see how to create external tables on stages using internal and external stages.
+
+
+1. Create a bucket
+
+Untick Block Public Access settings for this bucket
+
+Upload the source_file_for_external_stage.csv.txt and Rename source_file_for_external_stage.csv
+
+
+2. Create storage integration object 
+
+Syntax :-
+ 
+create or replace storage integration integration_object_name
+TYPE = EXTERNAL_STAGE 
+ENABLED = TRUE 
+STORAGE_PROVIDER = S3 
+STORAGE_ALLOWED_LOCATIONS = ('s3://bucket_name/path/', 's3://bucket_name/path/') 
+STORAGE_AWS_ROLE_ARN = 'copy_the_arn_of_role'
+COMMENT = 'Integration with aws s3 buckets' ;
+
+i.e.
+
+create or replace storage integration s3_integration 
+TYPE = EXTERNAL_STAGE 
+ENABLED = TRUE 
+STORAGE_PROVIDER = S3 
+STORAGE_ALLOWED_LOCATIONS = ('s3://snowflake2301/input/') 
+STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::725088688720:role/snowflakes3' 
+COMMENT = 'Integration with aws S3 Buckets';
+
+
+3. Get external_id and update it in S3 
+
+DESC integration s3_integration;
+
+
+## Reference:- https://community.snowflake.com/s/article/S3-Storage-Integration-Error-assuming-AWS-ROLE
+
+--- Create a IAM Role --> Create Role --> 
+AWS Account --> In An AWS account select choose AWS account type --> Options Select Require external ID --> Type in External ID '0000' 
+--> Add permissions of AmazonS3FullAccess --> Role name --> snowflake_s3_role --> Create
+
+--- From STORAGE_AWS_IAM_USER_ARN & STORAGE_AWS_EXTERNAL_ID copy the arn and paste in IAM_role_created_for_integration 
+--- Note :- STORAGE_AWS_EXTERNAL_ID changes everytime 
+
+
+Go to --> Trust relationships --> Click on Edit trust policy --> paste_the_arn_copied where "AWS" & " sts:ExternalId" is written --> Update policy   
+
+
+4. Create stage object with integration object & file format object
+
+CREATE OR REPLACE STAGE aws_s3
+    URL = 's3://snowflake2301/input/'
+    STORAGE_INTEGRATION = s3_integration;
+
+
+5. To check if data is loaded in the files or not
+
+list @aws_s3;
+
+
+6. To check if data is loaded in the files or not
+
+Select $1, $2, $3, $4, $5
+FROM @sky.externalstage.aws_s3;
+
+
+7. Create a table 
+
+create or replace table data(id int,name varchar(20),gmail string,city_name string,zip_code string);
+
+
+8. Create file format object
+
+CREATE OR REPLACE file format csv_fileformat
+    type = csv
+    field_delimiter = ','
+    record_delimiter ='\n'
+    skip_header = 1;
+
+
+9. Copy command to load the files
+
+    COPY INTO data
+    FROM @sky.externalstage.aws_s3
+    file_format = csv_fileformat;
+
+
+10. Validate the data
+
+    SELECT * FROM data;
+
+
+11. Altering storage integration
+
+ALTER STORAGE INTEGRATION s3_integration 
+  SET STORAGE_ALLOWED_LOCATIONS = ('s3://snowflake2301/output/');   
+  
+  
+12. Create or replace file format 
+
+create or replace file format unloading_ff
+ type = 'csv' , field_delimiter =',' , skip_header = 0, empty_field_as_null = true; 
+
+
+13. Create a Stage 
+
+create or replace stage unload_stage
+url = 's3://snowflake2301/output/'
+storage_integration = s3_integration
+file_format = unloading_ff;
+
+
+14. Copy command for unloading data to external stage
+
+OVERWRITE = TRUE | FALSE - Specifies to Overwrite existing files
+SINGLE = TRUE | FALSE - Specifies whether to generate a single file or multiple files
+MAX_FILE_SIZE = NUMBER - Maximum file size
+INCLUDE_QUERY_ID = TRUE | FALSE - Specifies whether to uniquely identify unloaded files by including a universally unique identifier
+DETAILED_OUTPUT = TRUE | FALSE - Shows the path and name for each file, its size, and the number of rows that were unloaded to the file.;
+
+1) 
+
+copy into @unload_stage
+from sky.externalstage.data ;
+
+
+2) If want other name of the file 
+
+copy into @unload_stage/customer
+from sky.externalstage.data ;
+
+
+3) Using max file size , overwrite
+
+copy into @unload_stage/custom
+from sky.externalstage.data 
+max_file_size = 2000000
+overwrite = true;
+
+
+4) Using single
+
+copy into @unload_stage/custom1
+from sky.externalstage.data 
+max_file_size = 2000000
+overwrite = true
+single = true;
+
+
+5) Using detailed output
+
+copy into @unload_stage/custom2
+from sky.externalstage.data 
+max_file_size = 2000000
+overwrite = true
+single = true
+detailed_output = true ;
+
+
+15. To check if data is unloaded in the stage or not
+
+list @unload_stage;
