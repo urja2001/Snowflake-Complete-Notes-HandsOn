@@ -1,0 +1,167 @@
+                                                                   Copy Command Options
+
+Syntax: 
+
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        [ copyOptions ]
+        VALIDATION_MODE = [ RETURN_<n>_ROWS | RETURN_ERRORS | RETURN_ALL_ERRORS ]
+        RETURN_FAILED_ONLY = TRUE | FALSE
+        ON_ERROR = [ CONTINUE | SKIP_FILE | SKIP_FILE_<num> | 'SKIP_FILE_<num>%' | ABORT_STATEMENT ]
+        FORCE = TRUE | FALSE
+        SIZE_LIMIT = <num>
+        TRUNCATECOLUMNS = TRUE | FALSE
+        ENFORCE_LENGTH = TRUE | FALSE
+        PURGE = TRUE | FALSE
+        LOAD_UNCERTAIN_FILES = TRUE | FALSE
+
+--------------------------------------------------------------------------------------------------------------------------
+
+1. VALIDATION_MODE
+
+Validates the data files instead of loading them into the table i.e. the COPY command tests the files for errors but does not load them.
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        VALIDATION_MODE = RETURN_<n>_ROWS | RETURN_ERRORS | RETURN_ALL_ERRORS 
+
+1) RETURN_n_ROWS (e.g. RETURN_10_ROWS) - Displays first N e.g. 10 records and fails at the first error encountered in the rows.
+
+2) RETURN_ERRORS - Gives all errors in the files.
+
+3) RETURN_ALL_ERRORS - Gives all errors from the files, including files with errors that were partially loaded during an earlier load because the ON_ERROR copy option was set to CONTINUE during the load.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+2. RETURN_FAILED_ONLY
+
+Specifies whether to return only files that have failed to load in the statement result.
+
+By Default is False.
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        RETURN_FAILED_ONLY = TRUE | FALSE
+
+--------------------------------------------------------------------------------------------------------------------------
+
+3. ON_ERROR
+
+String that specifies the error handling for the load operation.
+
+By Default is ABORT_STATEMENT.
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        ON_ERROR = CONTINUE | SKIP_FILE | SKIP_FILE_<num> | 'SKIP_FILE_<num>%' | ABORT_STATEMENT
+
+
+1) CONTINUE -  To skip error records and load remaining records. 
+
+Note : The difference between the ROWS_PARSED and ROWS_LOADED column values represents the number of rows that include detected errors. 
+       However, each of these rows could include multiple errors. To view all errors in the data files, use the VALIDATION_MODE parameter or query the VALIDATE function.
+
+2) SKIP_FILE - To skip the files that contain errors.
+
+Note : SKIP_FILE action buffers an entire file whether errors are found or not. 
+       For this reason, SKIP_FILE is slower than either CONTINUE or ABORT_STATEMENT. Skipping large files due to a small number of errors could result in delays and wasted credits. 
+       When loading large numbers of records from files that have no logical delineation (e.g. the files were generated automatically at rough intervals), consider specifying CONTINUE instead.
+
+3) SKIP_FILE_num (e.g. SKIP_FILE_10) - Skip a file when the number e.g. 10 of error rows found in the file is equal to or exceeds the specified number.
+
+4) SKIP_FILE_num%' (e.g. 'SKIP_FILE_10%') - Skip a file when the percentage  e.g. 10 of error rows found in the file exceeds the specified percentage.
+
+5) ABORT_STATEMENT- Abort the load operation if any error is found in a data file.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+4. FORCE
+
+To load all files, regardless of whether they’ve been loaded previously and have not changed since they were loaded.
+
+Note : Note that this option reloads files, potentially duplicating data in a table.
+
+By Default is False, if not specified this property Copy command will not fail but it skips loading the data. 
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        FORCE = TRUE | FALSE
+
+--------------------------------------------------------------------------------------------------------------------------
+5. SIZE_LIMIT
+
+Specify maximum size ( upto 25 MB ) in bytes of data loaded in that command.
+
+When threshold is exceeded, the Copy opration stops loading. 
+
+Note : At least one file is loaded regardless of the value specified for SIZE_LIMIT unless there is no file to be loaded.
+       In case of multiple files of same pattern also it will stop  after the size limit is reached i.e. Some files can be loaded fully & one file will be loade partially. 
+
+By default size is set to null i.e. no size limit
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        SIZE_LIMIT = <num>
+
+--------------------------------------------------------------------------------------------------------------------------
+
+6. TRUNCATECOLUMNS = TRUE | FALSE
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        TRUNCATECOLUMNS = TRUE | FALSE
+
+--------------------------------------------------------------------------------------------------------------------------
+
+7. ENFORCE_LENGTH
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        ENFORCE_LENGTH = TRUE | FALSE
+
+--------------------------------------------------------------------------------------------------------------------------
+
+8. PURGE
+
+ Specifies whether to remove the data files from the stage automatically after the data is loaded successfully.
+
+Note : If this option is set to TRUE, note that a best effort is made to remove successfully loaded data files. 
+       If the purge operation fails for any reason, no error is returned currently.
+
+By Default is False
+
+Syntax: 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        PURGE = TRUE | FALSE
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+9. LOAD_UNCERTAIN_FILES
+
+Syntax: 
+
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        LOAD_UNCERTAIN_FILES = TRUE | FALSE
+
+--------------------------------------------------------------------------------------------------------------------------
