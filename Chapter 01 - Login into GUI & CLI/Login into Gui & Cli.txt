@@ -39,6 +39,17 @@ Snowflake Documentation --> Guides -->  Organizations & Accounts --> Account Ide
 
 Reference :- https://docs.snowflake.com/en/user-guide/admin-account-identifier
 
+                                 OR
+
+On run snowflake gui
+
+select current_account(); -- KVB48513
+
+select current_region(); -- AWS_US_EAST_1
+
+select current_user(); -- URJA2301
+
+
 1) By Connecting it using account-identifier  
 
 cloud_region_id :- is the identifier for the cloud region (dictated by the cloud platform)
@@ -47,7 +58,7 @@ cloud :- is the identifier for the cloud platform (aws, azure, or gcp)
 
 Syntax :- snowsql -a account-identifier.cloud_region_id -u username
 
-snowsql -a QSB59620.us-east-1 -u Ruffina
+snowsql -a KVB48513.us-east-1 -u URJA2301
 
 
 2. By Connecting using conf file
@@ -58,9 +69,9 @@ a) Accesing snowflake without group
 
 ### Do this above connections
 
-accountname = account-identifier.cloud_region_id   or   account-identifier.cloud_region_id.cloud         # QSB59620.us-east-1 
-username = username                                                                                      # Ruffina 
-password = password                                                                                      # Ruffina2301
+accountname = account-identifier.cloud_region_id   or   account-identifier.cloud_region_id.cloud         # KVB48513.us-east-1
+username = username                                                                                      # URJA2301
+password = password                                                                                      # Ruffinajain@2301
 
 
 On Command Promopt type  :- snowsql
@@ -75,9 +86,9 @@ b) Accesing snowflake using group
 
 [connections.connection-name]                                                                            # catch_me_if_you_can 
 
-accountname = account-identifier.cloud_region_id   or   account-identifier.cloud_region_id.cloud         # QSB59620.us-east-1 
-username = username                                                                                      # Ruffina 
-password = password                                                                                      # Ruffina2301
+accountname = account-identifier.cloud_region_id   or   account-identifier.cloud_region_id.cloud         # KVB48513.us-east-1
+username = username                                                                                      # URJA2301 
+password = password                                                                                      # Ruffinajain@2301
 
 
 On Command Promopt type 
@@ -89,7 +100,7 @@ snowsql -c catch_me_if_you_can
 
 Syntax :- snowsql -c connection-name -u username
 
-snowsql -c catch_me_if_you_can -u Ruffina
+snowsql -c catch_me_if_you_can -u URJA2301 
 
 
 ### To exit Press :- Ctrl + D 
