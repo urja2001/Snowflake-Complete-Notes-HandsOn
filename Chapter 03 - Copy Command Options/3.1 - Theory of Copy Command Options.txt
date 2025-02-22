@@ -1,8 +1,8 @@
                                                                    Copy Command Options
 
-Loads data from files to an existing table. 
+● Loads data from files to an existing table. 
 
-The files must already be in one of the following locations:
+● The files must already be in one of the following locations:
 
        1) Named internal stage or table/user stage - Files can be staged using the PUT command.
        2) Named external stage - references an external location (Amazon S3, Google Cloud Storage, or Microsoft Azure).
@@ -10,7 +10,9 @@ The files must already be in one of the following locations:
 Syntax : 
         COPY INTO <table_name>
         FROM @InternalStage
+        pattern='.*/.*/.*[.]csv[.]gz'
         FILES = ( '<file_name>' ,= '<file_name>' )
+        file_format = <format_name>
         [ copyOptions ]
         VALIDATION_MODE = [ RETURN_<n>_ROWS | RETURN_ERRORS | RETURN_ALL_ERRORS ]
         RETURN_FAILED_ONLY = TRUE | FALSE
@@ -57,11 +59,11 @@ Syntax :
 
 3. ON_ERROR
 
-String that specifies the error handling for the load operation.
+● String that specifies the error handling for the load operation.
 
-By Default is ABORT_STATEMENT.
+● By Default is ABORT_STATEMENT.
 
-Syntax : 
+● Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -89,13 +91,13 @@ Note : SKIP_FILE action buffers an entire file whether errors are found or not.
 
 4. FORCE
 
-To load all files, regardless of whether they’ve been loaded previously and have not changed since they were loaded.
+● To load all files, regardless of whether they’ve been loaded previously and have not changed since they were loaded.
 
 Note : Note that this option reloads files, potentially duplicating data in a table.
 
-By Default is False, if not specified this property Copy command will not fail but it skips loading the data. 
+● By Default is False, if not specified this property Copy command will not fail but it skips loading the data. 
 
-Syntax : 
+● Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -105,16 +107,16 @@ Syntax :
 
 5. SIZE_LIMIT
 
-Specify maximum size ( upto 25 MB ) in bytes of data loaded in that command.
+● Specify maximum size ( upto 25 MB ) in bytes of data loaded in that command.
 
-When threshold is exceeded, the Copy opration stops loading. 
+● When threshold is exceeded, the Copy opration stops loading. 
 
 Note : At least one file is loaded regardless of the value specified for SIZE_LIMIT unless there is no file to be loaded.
        In case of multiple files of same pattern also it will stop  after the size limit is reached i.e. Some files can be loaded fully & one file will be loade partially. 
 
-By default size is set to null i.e. no size limit
+● By default size is set to null i.e. no size limit
 
-Syntax : 
+● Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
@@ -124,62 +126,60 @@ Syntax :
 
 6. TRUNCATECOLUMNS
 
-Syntax : 
+● Specifies whether to truncate text strings that exceed the target column length:
+
+Note : If TRUE, strings are automatically truncated to the target column length.
+
+● By Default is False, i.e. if not specified this option and if string exceeds the target column length,then Copy command will fail.
+
+● Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
         TRUNCATECOLUMNS = TRUE | FALSE
 
-Specifies whether to truncate text strings that exceed the target column length:
-
-Note : If TRUE, strings are automatically truncated to the target column length.
-
-By Default is False, i.e. if not specified this option and if string exceeds the target column length,then Copy command will fail.
-
 ------------------------------------------------- OR ----------------------------------------------------------------
 
  ENFORCE_LENGTH
 
-Syntax : 
-        COPY INTO <table_name>
-        FROM @ExternalStage
-        FILES = ( '<file_name>' ,= '<file_name>' )
-        ENFORCE_LENGTH = TRUE | FALSE
-
-Specifies whether to truncate text strings that exceed the target column length:
+● Specifies whether to truncate text strings that exceed the target column length:
 
 Note : By Default is True, i.e. if not specified this option and if string exceeds the target column length,then Copy command will fail.
        
        If FALSE, strings are automatically truncated to the target column length.
 
+● Syntax : 
+        COPY INTO <table_name>
+        FROM @ExternalStage
+        FILES = ( '<file_name>' ,= '<file_name>' )
+        ENFORCE_LENGTH = TRUE | FALSE
+
 --------------------------------------------------------------------------------------------------------------------------
 
 7. PURGE
 
- Specifies whether to remove the data files from the stage automatically after the data is loaded successfully.
+● Specifies whether to remove the data files from the stage automatically after the data is loaded successfully.
 
 Note : If this option is set to TRUE, note that a best effort is made to remove successfully loaded data files. 
        If the purge operation fails for any reason, no error is returned currently.
 
-By Default is False
+● By Default is False
 
-Syntax : 
+● Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
         PURGE = TRUE | FALSE
 
-
-
 --------------------------------------------------------------------------------------------------------------------------
 
 8. LOAD_UNCERTAIN_FILES
 
-Specifies to load files for which the load status is unknown. 
+● Specifies to load files for which the load status is unknown. 
 
-Not : The COPY command skips these files by default.
+Note : The COPY command skips these files by default.
       
-      The load status is unknown if all of the following conditions are true:
+●      The load status is unknown if all of the following conditions are true:
 
           1. The file’s LAST_MODIFIED date (i.e. date when the file was staged) is older than 64 days.
 
@@ -187,7 +187,7 @@ Not : The COPY command skips these files by default.
 
           3. If the file was already loaded successfully into the table, this event occurred more than 64 days earlier.
 
-Syntax : 
+● Syntax : 
         COPY INTO <table_name>
         FROM @ExternalStage
         FILES = ( '<file_name>' ,= '<file_name>' )
