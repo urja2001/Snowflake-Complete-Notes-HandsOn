@@ -27,7 +27,7 @@ Syntax :
 
 1. VALIDATION_MODE
 
-Validates the data files instead of loading them into the table i.e. the COPY command tests the files for errors but does not load them.
+Validates the data files instead of loading them into the table i.e. the COPY command tests the files for errors but does not load them i.e. to validate data files without actually loading them into the table
 
 Syntax : 
         COPY INTO <table_name>
@@ -37,7 +37,7 @@ Syntax :
 
 1) RETURN_n_ROWS (e.g. RETURN_10_ROWS) - Displays first N e.g. 10 records and fails at the first error encountered in the rows.
 
-2) RETURN_ERRORS - Gives all errors in the files.
+2) RETURN_ERRORS - Gives all errors in the files i.e. Validates the data and returns any errors found.
 
 3) RETURN_ALL_ERRORS - Gives all errors from the files, including files with errors that were partially loaded during an earlier load because the ON_ERROR copy option was set to CONTINUE during the load.
 
