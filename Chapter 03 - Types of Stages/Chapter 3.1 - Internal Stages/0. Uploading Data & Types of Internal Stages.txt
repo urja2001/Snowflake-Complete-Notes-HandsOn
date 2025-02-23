@@ -71,6 +71,10 @@ REMOVE @stage-type_name/file_name.csv.gz;
 ● Unloading data into local system
     get @~/user_stage_name/path-if-any file://destination-path-location-of-datafile;
 
+● Empty the files from an internal stage
+
+   REMOVE @~/user_stage_name/file_name.csv.gz;
+
 ------------------------------------------TABLE STAGE---------------------------------------------------------
 -- Each table has a table stage allocated to it by default for storing files
 -- Table stages name should be same as the table name ; e.g. a table named mytable has a stage referenced as @%mytable.
@@ -89,7 +93,11 @@ REMOVE @stage-type_name/file_name.csv.gz;
 
 ● Unloading data into local system
     get @%Same_table-stage_name_as_of_table-name_created/path-if-any file://destination-path-location-of-datafile;
-     
+
+● Empty the files from an internal stage
+
+   REMOVE @%Same_named-stage_name_as_of_table-name_created/file_name.csv.gz;
+
 ------------------------------------------------NAMED STAGE----------------------------------------------------
 
 -- Can load data into multiple tables(Needs user with appropriate privileges).
@@ -112,4 +120,8 @@ REMOVE @stage-type_name/file_name.csv.gz;
          list @customerstage;
 
 ● Unloading data into local system
-    get @Same_named-stage_name_as_of_stage-name_created/path-if-any file://destination-path-location-of-datafile;
+    get @Same_named-stage_name_as_of_table-name_created/path-if-any file://destination-path-location-of-datafile;
+
+● Empty the files from an internal stage
+
+   REMOVE @Same_named-stage_name_as_of_table-name_created/file_name.csv.gz;
