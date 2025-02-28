@@ -24,6 +24,7 @@
 <b> 1) ORGADMIN (Organization Administrator):</b> At the organisational level, this is a role that manages operation. i.e. Manages at organization-level operations and account visibility.
 
 Note :<br>
+       o GLOBALORGADMIN exists only in the organization account.
        o Can view all accounts in the organization using SHOW ORGANIZTION ACCOUNTS <br>
        o Also all regions are enabled for organization accounts using SHOW REGIONS <br>
        o Can view usage information across the organization.<br>
