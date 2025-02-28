@@ -1,0 +1,24 @@
+
+Column-level Security in Snowflake allows the application of a masking policy to a column within a table or view. 
+
+To protect sensitive data like customers PHI, bank balance info etc.
+
+Column-level Security includes two features:
+
+               Dynamic Data Masking
+               External Tokenization
+
+Dynamic Data Masking is a Column-level Security feature that uses masking policies to selectively mask plain-text data in table and view columns at query time.
+
+Tokenization is the process of hiding sensitive data by replacing it with an cipher text.
+
+External Tokenization makes use of masking policies with external functions created at external cloud provider side.
+
+
+Masking Policies
+
+Snowflake supports masking policies to protect sensitive data from unauthorized access while allowing authorized users to access sensitive data at query runtime.
+
+Masking policies are schema-level objects.
+
+Masking policies can include conditions and functions to transform the data at query runtime when those conditions are met.
