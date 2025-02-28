@@ -65,6 +65,8 @@ Note :
  o It can view all accounts in the organization using SHOW ORGANIZTION ACCOUNTS as well as all regions are enabled for the organization using SHOW REGIONS
  o It can also view usage information across the organization.
 
+Note : GLOBALORGADMIN exists only in the organization account.
+
 
 • ACCOUNTADMIN (Account Administrator) :
 
