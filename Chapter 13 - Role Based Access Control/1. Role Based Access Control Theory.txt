@@ -71,35 +71,37 @@ Note :
  o It is the top-level role in the Snowflake.
  o Ony Account Admin can see all account related things like usaege , billing , usrs , roles , sessions and reader account details.
  o It should only be granted to a limited/controlled number of users in the account.
+ o Can enable Multi Factor Authentication.
  o This role combines the power of SYSADMIN and SECURITYADMIN roles.
 
 
 • SECURITYADMIN (Security Administrator) :
 
  o This role can manage any object grant globally.
- o It has the ability to create, monitor, and manage users and roles.
- o It is granted the MANAGE GRANTS security privilege to be able to modify any grant, including revoking it.
- o It inherits the privileges of the USERADMIN role via the system role hierarchy.
+ o It has the ability to create, monitor and manage users and roles.
+ o It is granted the MANAGE GRANTS security privilege to be able to modify any grant, including revoking it i.e. Limites access to Account tab. 
+ o It inherits the privileges of the USERADMIN role via the system role i.e. SYSADMIN hierarchy.
 
 
 • USERADMIN (User and Role Administrator) :
 
  o This particular role is dedicated to user and role management only.
  o It is granted the CREATE USER and CREATE ROLE security privileges.
- o It can create users and roles in the account.
- o It can manage users and roles that it owns.
+ o It can create users and roles in the account i.e. It can manage users and roles that it owns.
 
 
 • SYSADMIN (System Administrator) :
 
  o This role has privileges to create warehouses, databases, and various other objects in the account.
- o It can grant privileges on warehouses, databases, and other objects to other roles if all custom roles are ultimately assigned to the SYSADMIN role.
+ o It also has the ability to grant privileges on warehouses, databases, and other objects to other roles.
+ o All custom roles are assigned to  SYSADMIN role.
+
 
 • PUBLIC :
 
- o This role is automatically granted to every user and every role in the account.
- o It can own securable objects, but the objects are available to every other user and role in the account.
- o It is typically used when explicit access control is not needed.
+ o By Default PUBLIC role is automatically granted to every user and every role in the account.
+ o The objects owned by the role, by definition is available to every other user and role in the account.
+ o It is typically used when all users have all access rightwhen explicit access to the objects i.e. It is typically used when explicit access control is not needed.
 
 -------------------------------------------------------------------------------
 
