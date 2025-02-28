@@ -2,10 +2,10 @@
 
 ## •	Role :
 
- o	Roles are the entities to which privileges on securable objects can be granted and revoked.
- o	Roles are assigned to users to allow them to perform actions required for business function.
- o	A user can be assigned multiple roles. This  allows users to switch roles.
- o	On Snowflake web UI the top right corner shows which Role is currently user is using.
+ o	Roles are the entities to which privileges on securable objects can be granted and revoked.<br>
+ o	Roles are assigned to users to allow them to perform actions required for business function.<br>
+ o	A user can be assigned multiple roles. This  allows users to switch roles.<br>
+ o	On Snowflake web UI the top right corner shows which Role is currently user is using.<br>
 
 
 ## 2 Types of Roles Snowflake 
