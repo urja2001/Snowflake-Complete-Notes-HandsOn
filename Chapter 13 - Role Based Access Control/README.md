@@ -1,4 +1,4 @@
-# Types of Roles & Securable Objects in Snowflake  ❄️
+# Role Based Access Control in Snowflake  ❄️
 
 <div align="center">
 <img align="left" alt="Snowflake" src="https://github.com/urja2001/Snowflake-Complete-Notes-HandsOn/blob/651f506e9ce6a3792d99d2c4db0256e6b5e2de8a/Chapter%2000%20-%20Architecture%20of%20%20Snowflake/pics/Key%20Concepts%20in%20RBAC.jpg" width="480" height="400" style="border-radius:50%">
